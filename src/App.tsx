@@ -1,8 +1,9 @@
 import "./styles.css";
 import useSWR from "swr";
 import { ArtPiece } from "./types";
-import { data, Navigate, Route, Routes } from "react-router";
+import { Route, Routes } from "react-router";
 import ArtPieceList from "./components/ListOfArtPieces/ListOfArtPieces";
+import Spotlight from "./pages/Spotlight";
 
 const URL = `https://example-apis.vercel.app/api/art`;
 
@@ -40,6 +41,7 @@ export default function App() {
     <main>
       <h1>Art Gallery</h1>
       <Routes>
+        <Route path="/" element={<Spotlight artPieces={artPieces} />} />
         <Route
           path="/art-pieces"
           element={<ArtPieceList artPieces={artPieces} />}

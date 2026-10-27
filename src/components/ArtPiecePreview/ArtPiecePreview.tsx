@@ -13,8 +13,9 @@ export default function ArtPiecePreview({
 }: ArtPiecePreviewProps) {
   return (
     <>
-      <img src={imageSource} alt={name} />
       <h3>{artist}</h3>
+      <h3>{name}</h3>
+      <img src={imageSource} alt={name} />
     </>
   );
 }

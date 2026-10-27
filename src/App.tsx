@@ -45,7 +45,6 @@ export default function App() {
           element={<ArtPieceList artPieces={artPieces} />}
         />
       </Routes>
-      <p>Start building your app here.</p>
     </main>
   );
 }

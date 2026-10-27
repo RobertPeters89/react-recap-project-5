@@ -20,10 +20,10 @@ export default function ArtPieceDetails({ artPieces }: ArtPieceDetailsProps) {
   return (
     <div className="details">
       <img src={artPiece.imageSource} alt={artPiece.name} />
-      <h3>{artPiece.name}</h3>
-      <p>{artPiece.artist}</p>
-      <p>{artPiece.year}</p>
-      <p>{artPiece.genre}</p>
+      <h3>Titel: {artPiece.name}</h3>
+      <p>Artist: {artPiece.artist}</p>
+      <p>Year: {artPiece.year}</p>
+      <p>Genre: {artPiece.genre}</p>
     </div>
   );
 }

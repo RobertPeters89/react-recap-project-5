@@ -4,6 +4,7 @@ import { ArtPiece } from "./types";
 import { Route, Routes } from "react-router";
 import ArtPieceList from "./components/ListOfArtPieces/ListOfArtPieces";
 import Spotlight from "./pages/Spotlight";
+import Navigation from "./components/Navigation/Navigation";
 
 const URL = `https://example-apis.vercel.app/api/art`;
 
@@ -40,12 +41,14 @@ export default function App() {
   return (
     <main>
       <h1>Art Gallery</h1>
+      <Navigation />
       <Routes>
         <Route path="/" element={<Spotlight artPieces={artPieces} />} />
         <Route
           path="/art-pieces"
           element={<ArtPieceList artPieces={artPieces} />}
         />
+        <Route path="*" element={<h1>Page not found</h1>} />
       </Routes>
     </main>
   );

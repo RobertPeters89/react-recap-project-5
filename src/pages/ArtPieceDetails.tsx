@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router";
-import { ArtPiece } from "../../types";
+import { ArtPiece } from "../types";
 
 type ArtPieceDetailsProps = {
   artPieces: ArtPiece[];
@@ -26,7 +26,7 @@ export default function ArtPieceDetails({ artPieces }: ArtPieceDetailsProps) {
       <p>Year: {artPiece.year}</p>
       <p>Genre: {artPiece.genre}</p>
       <button type="button" onClick={() => navigate("/art-pieces")}>
-        Back to Art-Pieces
+        Back to Gallery
       </button>
     </div>
   );

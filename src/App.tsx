@@ -6,6 +6,7 @@ import ArtPieceList from "./components/ListOfArtPieces/ListOfArtPieces";
 import ArtPieceDetails from "./pages/ArtPieceDetails";
 import Spotlight from "./pages/Spotlight";
 import Navigation from "./components/Navigation/Navigation";
+import { useState } from "react";
 
 const URL = `https://example-apis.vercel.app/api/art`;
 
@@ -39,6 +40,18 @@ export default function App() {
   if (error) return <p>Error: {error.message}</p>;
   if (!artPieces) return null;
 
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  function handleToggleFavorite(event: any): void {
+    console.log(event.target.value);
+    const favorite = artPieces?.filter((piece) =>
+      piece.slug === event.target.value
+        ? { ...piece, isFavorite: !piece.IsFavorite }
+        : piece
+    );
+  }
+
+  // console.log(artPieces);
+
   return (
     <main>
       <h1>Art Gallery</h1>
@@ -47,7 +60,12 @@ export default function App() {
         <Route path="/" element={<Spotlight artPieces={artPieces} />} />
         <Route
           path="/art-pieces"
-          element={<ArtPieceList artPieces={artPieces} />}
+          element={
+            <ArtPieceList
+              artPieces={artPieces}
+              handleToggleFavorite={handleToggleFavorite}
+            />
+          }
         />
         <Route
           path="/art-pieces/:slug"

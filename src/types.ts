@@ -14,3 +14,9 @@ export type ArtPiece = {
   colors: string[];
   dimensions: Dimensions;
 };
+
+export type ArtPieceInfo = {
+  slug: string;
+  isFavorite: boolean;
+  onToogleFavorite: (slug: string) => void;
+};

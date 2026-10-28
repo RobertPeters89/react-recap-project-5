@@ -15,7 +15,13 @@ export type ArtPiece = {
   dimensions: Dimensions;
 };
 
+export type ArtPieceComment = {
+  text: string;
+  date: string;
+};
+
 export type ArtPieceInfo = {
   slug: string;
   isFavorite: boolean;
+  comments: ArtPieceComment[];
 };

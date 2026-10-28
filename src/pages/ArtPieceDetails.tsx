@@ -1,23 +1,17 @@
 import { Link, useNavigate, useParams } from "react-router";
-import { ArtPiece, ArtPieceListProps, ArtPieceInfo } from "../types";
+import { ArtPieceDetailsProps } from "../types";
 import FavoriteButton from "../components/FavoriteButton/FavoriteButton";
 import ColorPalette from "../components/ColorPalette/ColorPalette";
 
 import CommentForm from "../components/CommentForm/CommentForm";
 import Comments from "../components/Comments/Comments";
-    
-type ArtPieceDetailsProps = {
-  artPieces: ArtPiece[];
-  artPieceInfo: ArtPieceInfo[];
-  onAddComment: (slug: string, text: string) => void;
-};
-        
+
 export default function ArtPieceDetails({
   artPieces,
   artPieceInfo,
   handleToggleFavorite,
   onAddComment,
-}: ArtPieceListProps) {
+}: ArtPieceDetailsProps) {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const artPiece = artPieces.find((piece) => piece.slug === slug);

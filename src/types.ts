@@ -31,3 +31,10 @@ export type ArtPieceListProps = {
   artPieceInfo: ArtPieceInfo[];
   handleToggleFavorite: (slug: string) => void;
 };
+
+export type ArtPieceDetailsProps = {
+  artPieces: ArtPiece[];
+  artPieceInfo: ArtPieceInfo[];
+  handleToggleFavorite: (slug: string) => void;
+  onAddComment: (slug: string, text: string) => void;
+};

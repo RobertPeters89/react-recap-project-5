@@ -1,12 +1,22 @@
 import { Link, useNavigate, useParams } from "react-router";
-import { ArtPiece, ArtPieceListProps } from "../types";
+import { ArtPiece, ArtPieceListProps, ArtPieceInfo } from "../types";
 import FavoriteButton from "../components/FavoriteButton/FavoriteButton";
 import ColorPalette from "../components/ColorPalette/ColorPalette";
 
+import CommentForm from "../components/CommentForm/CommentForm";
+import Comments from "../components/Comments/Comments";
+    
+type ArtPieceDetailsProps = {
+  artPieces: ArtPiece[];
+  artPieceInfo: ArtPieceInfo[];
+  onAddComment: (slug: string, text: string) => void;
+};
+        
 export default function ArtPieceDetails({
   artPieces,
   artPieceInfo,
   handleToggleFavorite,
+  onAddComment,
 }: ArtPieceListProps) {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -20,6 +30,8 @@ export default function ArtPieceDetails({
     );
   }
 
+  const comments =
+    artPieceInfo.find((info) => info.slug === artPiece.slug)?.comments ?? [];
   const isFavorite =
     artPieceInfo.find((info) => info.slug === artPiece.slug)?.isFavorite ??
     false;
@@ -42,6 +54,11 @@ export default function ArtPieceDetails({
       <p>Year: {artPiece.year}</p>
       <p>Genre: {artPiece.genre}</p>
       <ColorPalette colors={artPiece.colors} />
+      <Comments comments={comments} />
+      <CommentForm onAddComment={(text) => onAddComment(artPiece.slug, text)} />
+      <button type="button" onClick={() => navigate("/art-pieces")}>
+        Back to Gallery
+      </button>
     </div>
   );
 }

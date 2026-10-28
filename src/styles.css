@@ -1,3 +1,8 @@
+:root {
+  --main-black: rgb(22, 22, 29);
+  --main-white: rgb(207, 207, 207);
+}
+
 *,
 *::before,
 *::after {
@@ -8,8 +13,8 @@ body {
   margin: 0;
   font-family: system-ui, sans-serif;
   line-height: 1.5;
-  color: #222;
-  background: #f6f4ef;
+  color: var(--main-white);
+  background: var(--main-black);
 }
 
 main {
@@ -32,12 +37,12 @@ nav {
 }
 
 nav a {
-  color: #ccc;
+  color: rgb(90, 89, 89);
   text-decoration: none;
 }
 
 nav a.active {
-  color: white;
+  color: var(--main-white);
   text-decoration: underline;
 }
 
@@ -52,6 +57,11 @@ nav a.active {
 .art-piece {
   position: relative;
   margin: 0;
+}
+
+.art-piece a {
+  text-decoration: none;
+  color: var(--main-white);
 }
 
 .art-piece img {
@@ -78,22 +88,39 @@ nav a.active {
 
 .favorite-button {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 1rem;
+  right: 1rem;
   display: grid;
   place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3rem;
+  height: 3rem;
   padding: 0;
-  color: #444;
+  color: rgb(214, 51, 108);
+  fill: none;
   cursor: pointer;
-  background: white;
+  background-color: var(--main-white);
   border: none;
   border-radius: 50%;
-}
 
-.favorite-button[aria-pressed="true"] {
-  color: #d6336c;
+  &:hover svg {
+    fill: rgb(214, 51, 108);
+  }
+}
+.navBack {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  position: fixed;
+  border: 2px solid transparent;
+  background-color: var(--main-white);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: 0.25s;
+  &:hover {
+    border: 2px solid var(--main-white);
+    background-color: var(--main-black);
+    color: var(--main-white);
+  }
 }
 
 .details img {

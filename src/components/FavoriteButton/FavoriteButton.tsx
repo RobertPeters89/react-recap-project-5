@@ -20,9 +20,9 @@ export default function FavoriteButton({
       aria-label="Favorit"
     >
       <Heart
-        fill={isFavorite ? "currentColor" : "none"}
+        fill={isFavorite ? "currentColor" : "currentFill"}
         color="currentColor"
-        size={40}
+        size={35}
       />
     </button>
   );

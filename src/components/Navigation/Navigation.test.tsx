@@ -9,19 +9,16 @@ test("renders all three navigation link", () => {
     </MemoryRouter>
   );
 
+  const spotlightLink = screen.getByRole("link", { name: "Spotlight" });
+  expect(spotlightLink).toHaveAttribute("href", "/");
+
+  const artPiecesLink = screen.getByRole("link", { name: "Art Pieces" });
+  expect(artPiecesLink).toHaveAttribute("href", "/art-pieces");
+
+  const favorites = screen.getByRole("link", { name: "Favorites" });
+  expect(favorites).toHaveAttribute("href", "/favorites");
+
   expect(screen.getAllByRole("link")).toHaveLength(3);
-  expect(screen.getByRole("link", { name: "Spotlight" })).toHaveAttribute(
-    "href",
-    "/"
-  );
-  expect(screen.getByRole("link", { name: "Art Pieces" })).toHaveAttribute(
-    "href",
-    "/art-pieces"
-  );
-  expect(screen.getByRole("link", { name: "Favorites" })).toHaveAttribute(
-    "href",
-    "/favorites"
-  );
 });
 
 test("the navigation is marked", () => {

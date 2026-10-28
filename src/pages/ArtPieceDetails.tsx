@@ -2,7 +2,6 @@ import { Link, useNavigate, useParams } from "react-router";
 import { ArtPieceDetailsProps } from "../types";
 import FavoriteButton from "../components/FavoriteButton/FavoriteButton";
 import ColorPalette from "../components/ColorPalette/ColorPalette";
-import CommentForm from "../components/CommentForm/CommentForm";
 import Comments from "../components/Comments/Comments";
 
 export default function ArtPieceDetails({
@@ -57,8 +56,11 @@ export default function ArtPieceDetails({
           </div>
         </div>
       </div>
-      <Comments comments={comments} />
-      <CommentForm onAddComment={(text) => onAddComment(artPiece.slug, text)} />
+      <Comments
+        slug={artPiece.slug}
+        onAddComment={onAddComment}
+        comments={comments}
+      />
     </>
   );
 }

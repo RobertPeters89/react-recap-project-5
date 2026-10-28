@@ -33,8 +33,11 @@ export default function Spotlight({
           />
         </div>
         <div>
-          <h3>{spotLightPeice.name}</h3>
-          <p>{spotLightPeice.artist}</p>
+          <h2>
+            <span className="artist">{spotLightPeice.artist}</span>
+            <br />
+            {spotLightPeice.name}{" "}
+          </h2>
         </div>
       </div>
     </>

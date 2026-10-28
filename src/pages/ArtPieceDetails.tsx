@@ -39,7 +39,6 @@ export default function ArtPieceDetails({
         Back to Gallery →
       </button>
       <div className="details">
-        <h2>{artPiece.name}</h2>
         <div className="detailsContainer">
           <div className="detailsImageContainer">
             <img src={artPiece.imageSource} alt={artPiece.name} />
@@ -51,16 +50,15 @@ export default function ArtPieceDetails({
             <ColorPalette colors={artPiece.colors} />
           </div>
           <div>
-            <h3>{artPiece.artist}</h3>
+            <p className="artist">{artPiece.artist}</p>
+            <h2>{artPiece.name}</h2>
             <p>Year {artPiece.year}</p>
             <p>{artPiece.genre}</p>
           </div>
         </div>
-        <Comments comments={comments} />
-        <CommentForm
-          onAddComment={(text) => onAddComment(artPiece.slug, text)}
-        />
       </div>
+      <Comments comments={comments} />
+      <CommentForm onAddComment={(text) => onAddComment(artPiece.slug, text)} />
     </>
   );
 }

@@ -6,7 +6,7 @@ type CommentsProps = {
 
 export default function Comments({ comments }: CommentsProps) {
   return (
-    <section>
+    <section className="commentSection">
       <h2>Comments</h2>
       {comments.length === 0 ? (
         <p>No comments yet.</p>

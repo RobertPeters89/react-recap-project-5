@@ -7,7 +7,7 @@ type CommentFormProps = {
 export default function CommentForm({ onAddComment }: CommentFormProps) {
   const [text, setText] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const trimmed = text.trim();

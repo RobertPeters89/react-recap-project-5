@@ -6,7 +6,7 @@ export default function Navigation() {
       <NavLink to="/" end>
         Spotlight
       </NavLink>
-      <NavLink to="/art-pieces">Gallery</NavLink>
+      <NavLink to="/art-pieces">Art Pieces</NavLink>
       <NavLink to="/favorites">Favorites</NavLink>
     </nav>
   );

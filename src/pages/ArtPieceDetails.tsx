@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router";
 import { ArtPiece, ArtPieceListProps } from "../types";
 import FavoriteButton from "../components/FavoriteButton/FavoriteButton";
+import ColorPalette from "../components/ColorPalette/ColorPalette";
 
 export default function ArtPieceDetails({
   artPieces,
@@ -40,6 +41,7 @@ export default function ArtPieceDetails({
       <p>Artist: {artPiece.artist}</p>
       <p>Year: {artPiece.year}</p>
       <p>Genre: {artPiece.genre}</p>
+      <ColorPalette colors={artPiece.colors} />
     </div>
   );
 }

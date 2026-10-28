@@ -1,6 +1,6 @@
 import "./styles.css";
 import useSWR from "swr";
-import { ArtPiece, ArtPieceInfo } from "./types";
+import { ArtPiece, ArtPieceComment, ArtPieceInfo } from "./types";
 import { Route, Routes } from "react-router";
 import ArtPieceList from "./components/ListOfArtPieces/ListOfArtPieces";
 import ArtPieceDetails from "./pages/ArtPieceDetails";
@@ -47,7 +47,33 @@ export default function App() {
       );
       setArtPieceInfo(updated);
     } else {
-      setArtPieceInfo([...artPieceInfo, { slug, isFavorite: true }]);
+      setArtPieceInfo([
+        ...artPieceInfo,
+        { slug, isFavorite: true, comments: [] },
+      ]);
+    }
+  }
+
+  function handleAddComment(slug: string, text: string): void {
+    const newComment: ArtPieceComment = {
+      text,
+      date: new Date().toISOString(),
+    };
+
+    const existing = artPieceInfo.find((info) => info.slug === slug);
+
+    if (existing) {
+      const updated = artPieceInfo.map((info) =>
+        info.slug === slug
+          ? { ...info, comments: [...info.comments, newComment] }
+          : info
+      );
+      setArtPieceInfo(updated);
+    } else {
+      setArtPieceInfo([
+        ...artPieceInfo,
+        { slug, isFavorite: false, comments: [newComment] },
+      ]);
     }
   }
   if (!artPieces) return null;
@@ -98,6 +124,7 @@ export default function App() {
             <ArtPieceDetails
               artPieces={artPieces}
               artPieceInfo={artPieceInfo}
+              onAddComment={handleAddComment}
               handleToggleFavorite={handleToggleFavorite}
             />
           }

@@ -1,8 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import ArtPiecePreview from "./ArtPiecePreview";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
-test("renders slug, image, name, artist and children", () => {
+test("renders slug, image, name, artist and children", async () => {
+  const onToggleFavorite = vi.fn();
+  let isFavorite = false;
+
   render(
     <MemoryRouter>
       <ArtPiecePreview
@@ -11,7 +15,11 @@ test("renders slug, image, name, artist and children", () => {
         name="Peters"
         artist="John Doe"
       >
-        <button type="button">Child</button>
+        <FavoriteButton
+          slug="abc"
+          isFavorite={isFavorite}
+          onToggleFavorite={onToggleFavorite}
+        />
       </ArtPiecePreview>
     </MemoryRouter>
   );

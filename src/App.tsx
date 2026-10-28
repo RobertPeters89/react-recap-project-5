@@ -1,11 +1,12 @@
 import "./styles.css";
 import useSWR from "swr";
-import { ArtPiece } from "./types";
+import { ArtPiece, ArtPieceInfo } from "./types";
 import { Route, Routes } from "react-router";
 import ArtPieceList from "./components/ListOfArtPieces/ListOfArtPieces";
 import ArtPieceDetails from "./pages/ArtPieceDetails";
 import Spotlight from "./pages/Spotlight";
 import Navigation from "./components/Navigation/Navigation";
+import { useState } from "react";
 
 const URL = `https://example-apis.vercel.app/api/art`;
 
@@ -34,6 +35,20 @@ export default function App() {
     error,
     isLoading,
   } = useSWR<ArtPiece[]>(URL, fetcher);
+  const [artPieceInfo, setArtPieceInfo] = useState<ArtPieceInfo[]>([]);
+
+  function handleToggleFavorite(slug: string): void {
+    const existing = artPieceInfo.find((info) => info.slug === slug);
+
+    if (existing) {
+      const updated = artPieceInfo.map((info) =>
+        info.slug === slug ? { ...info, isFavorite: !info.isFavorite } : info
+      );
+      setArtPieceInfo(updated);
+    } else {
+      setArtPieceInfo([...artPieceInfo, { slug, isFavorite: true }]);
+    }
+  }
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -47,7 +62,13 @@ export default function App() {
         <Route path="/" element={<Spotlight artPieces={artPieces} />} />
         <Route
           path="/art-pieces"
-          element={<ArtPieceList artPieces={artPieces} />}
+          element={
+            <ArtPieceList
+              artPieces={artPieces}
+              artPieceInfo={artPieceInfo}
+              handleToggleFavorite={handleToggleFavorite}
+            />
+          }
         />
         <Route
           path="/art-pieces/:slug"

@@ -7,13 +7,13 @@ import ArtPieceDetails from "./pages/ArtPieceDetails";
 import Spotlight from "./pages/Spotlight";
 import Navigation from "./components/Navigation/Navigation";
 import { useState } from "react";
+import Favorite from "./pages/Favorite";
 
 const URL = `https://example-apis.vercel.app/api/art`;
 
 async function fetcher(URL: string): Promise<ArtPiece[]> {
   try {
     const response = await fetch(URL);
-
     if (!response.ok) {
       throw new Error(`Error Status: ${response.status}`);
     }
@@ -35,6 +35,7 @@ export default function App() {
     error,
     isLoading,
   } = useSWR<ArtPiece[]>(URL, fetcher);
+
   const [artPieceInfo, setArtPieceInfo] = useState<ArtPieceInfo[]>([]);
 
   function handleToggleFavorite(slug: string): void {
@@ -49,17 +50,38 @@ export default function App() {
       setArtPieceInfo([...artPieceInfo, { slug, isFavorite: true }]);
     }
   }
+  if (!artPieces) return null;
+  const currentFavArt: ArtPiece[] = artPieces?.filter((artPiece) => {
+    const slug: string = artPiece.slug;
+    const favArtPiece: any = artPieceInfo.find(
+      (newArtPicece) => newArtPicece.slug == slug
+    );
+    if (favArtPiece && favArtPiece.isFavorite) {
+      return artPiece;
+    }
+  });
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
   if (!artPieces) return null;
+
+  console.log(artPieceInfo);
 
   return (
     <main>
       <h1>Art Gallery</h1>
       <Navigation />
       <Routes>
-        <Route path="/" element={<Spotlight artPieces={artPieces} />} />
+        <Route
+          path="/"
+          element={
+            <Spotlight
+              artPieces={artPieces}
+              artPieceInfo={artPieceInfo}
+              handleToggleFavorite={handleToggleFavorite}
+            />
+          }
+        />
         <Route
           path="/art-pieces"
           element={
@@ -72,7 +94,23 @@ export default function App() {
         />
         <Route
           path="/art-pieces/:slug"
-          element={<ArtPieceDetails artPieces={artPieces} />}
+          element={
+            <ArtPieceDetails
+              artPieces={artPieces}
+              artPieceInfo={artPieceInfo}
+              handleToggleFavorite={handleToggleFavorite}
+            />
+          }
+        />
+        <Route
+          path="/favorites"
+          element={
+            <Favorite
+              artPieces={currentFavArt}
+              artPieceInfo={artPieceInfo}
+              handleToggleFavorite={handleToggleFavorite}
+            />
+          }
         />
         <Route path="*" element={<h1>Page not found</h1>} />
       </Routes>

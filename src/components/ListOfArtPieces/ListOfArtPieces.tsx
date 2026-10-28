@@ -1,12 +1,6 @@
-import { ArtPiece, ArtPieceInfo } from "../../types";
+import { ArtPieceListProps } from "../../types";
 import ArtPiecePreview from "../ArtPiecePreview/ArtPiecePreview";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
-
-type ArtPieceListProps = {
-  artPieces: ArtPiece[];
-  artPieceInfo: ArtPieceInfo[];
-  handleToggleFavorite: (slug: string) => void;
-};
 
 export default function ArtPieceList({
   artPieces,
@@ -27,12 +21,13 @@ export default function ArtPieceList({
               imageSource={artPiece.imageSource}
               name={artPiece.name}
               artist={artPiece.artist}
-            />
-            <FavoriteButton
-              slug={artPiece.slug}
-              isFavorite={isFavorite}
-              onToggleFavorite={handleToggleFavorite}
-            />
+            >
+              <FavoriteButton
+                slug={artPiece.slug}
+                isFavorite={isFavorite}
+                onToggleFavorite={handleToggleFavorite}
+              />
+            </ArtPiecePreview>
           </li>
         );
       })}

@@ -67,6 +67,11 @@ nav a.active {
   margin: 0.25rem 0 0;
 }
 
+.spotlight {
+  position: relative;
+  width: fit-content;
+}
+
 .spotlight img {
   height: 28rem;
 }
@@ -131,4 +136,16 @@ nav a.active {
   display: grid;
   gap: 0.5rem;
   max-width: 24rem;
+}
+
+.details-image {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.details-image img {
+  display: block;
+  width: auto;
+  max-width: 100%;
 }

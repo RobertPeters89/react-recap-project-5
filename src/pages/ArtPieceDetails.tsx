@@ -1,6 +1,8 @@
 import { Link, useNavigate, useParams } from "react-router";
 import { ArtPiece, ArtPieceListProps, ArtPieceInfo } from "../types";
 import FavoriteButton from "../components/FavoriteButton/FavoriteButton";
+import ColorPalette from "../components/ColorPalette/ColorPalette";
+
 import CommentForm from "../components/CommentForm/CommentForm";
 import Comments from "../components/Comments/Comments";
     
@@ -51,6 +53,7 @@ export default function ArtPieceDetails({
       <p>Artist: {artPiece.artist}</p>
       <p>Year: {artPiece.year}</p>
       <p>Genre: {artPiece.genre}</p>
+      <ColorPalette colors={artPiece.colors} />
       <Comments comments={comments} />
       <CommentForm onAddComment={(text) => onAddComment(artPiece.slug, text)} />
       <button type="button" onClick={() => navigate("/art-pieces")}>

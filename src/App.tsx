@@ -37,18 +37,18 @@ export default function App() {
   } = useSWR<ArtPiece[]>(URL, fetcher);
   const [artPieceInfo, setArtPieceInfo] = useState<ArtPieceInfo[]>([]);
 
-function handleToggleFavorite(slug: string): void {
-  const existing = artPieceInfo.find((info) => info.slug === slug);
+  function handleToggleFavorite(slug: string): void {
+    const existing = artPieceInfo.find((info) => info.slug === slug);
 
-  if (existing) {
-    const updated = artPieceInfo.map((info) =>
-      info.slug === slug ? { ...info, isFavorite: !info.isFavorite } : info
-    );
-    setArtPieceInfo(updated);
-  } else {
-    setArtPieceInfo([...artPieceInfo, { slug, isFavorite: true }]);
+    if (existing) {
+      const updated = artPieceInfo.map((info) =>
+        info.slug === slug ? { ...info, isFavorite: !info.isFavorite } : info
+      );
+      setArtPieceInfo(updated);
+    } else {
+      setArtPieceInfo([...artPieceInfo, { slug, isFavorite: true }]);
+    }
   }
-}
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;

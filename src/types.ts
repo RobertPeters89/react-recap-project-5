@@ -25,3 +25,9 @@ export type ArtPieceInfo = {
   isFavorite: boolean;
   comments: ArtPieceComment[];
 };
+
+export type ArtPieceListProps = {
+  artPieces: ArtPiece[];
+  artPieceInfo: ArtPieceInfo[];
+  handleToggleFavorite: (slug: string) => void;
+};

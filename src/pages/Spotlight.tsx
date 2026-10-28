@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ArtPiece } from "../types";
+import { ArtPiece, ArtPieceListProps } from "../types";
+import FavoriteButton from "../components/FavoriteButton/FavoriteButton";
 
 function getRandomArtPiece(artPieces: ArtPiece[]): ArtPiece {
   const RandomNumber = Math.floor(Math.random() * artPieces.length);
@@ -7,18 +8,28 @@ function getRandomArtPiece(artPieces: ArtPiece[]): ArtPiece {
   return Art;
 }
 
-type SpotlightProps = {
-  artPieces: ArtPiece[];
-};
-
-export default function Spotlight({ artPieces }: SpotlightProps) {
+export default function Spotlight({
+  artPieces,
+  artPieceInfo,
+  handleToggleFavorite,
+}: ArtPieceListProps) {
   const [spotLightPeice] = useState<ArtPiece>(() =>
     getRandomArtPiece(artPieces)
   );
+
+  const isFavorite =
+    artPieceInfo.find((info) => info.slug === spotLightPeice.slug)
+      ?.isFavorite ?? false;
+
   return (
     <div className="spotlight">
       <img src={spotLightPeice.imageSource} alt={spotLightPeice.name} />
       <p>{spotLightPeice.artist}</p>
+      <FavoriteButton
+        slug={spotLightPeice.slug}
+        isFavorite={isFavorite}
+        onToggleFavorite={handleToggleFavorite}
+      />
     </div>
   );
 }

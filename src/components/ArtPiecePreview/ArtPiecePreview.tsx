@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { Link } from "react-router";
 
 type ArtPiecePreviewProps = {
@@ -5,6 +6,7 @@ type ArtPiecePreviewProps = {
   imageSource: string;
   name: string;
   artist: string;
+  children: ReactNode;
 };
 
 export default function ArtPiecePreview({
@@ -12,13 +14,15 @@ export default function ArtPiecePreview({
   imageSource,
   name,
   artist,
+  children,
 }: ArtPiecePreviewProps) {
   return (
     <div className="art-piece">
+      <img src={imageSource} alt={name} />
+      {children}
       <Link to={`/art-pieces/${slug}`}>
-        <h3>{artist}</h3>
-        <h3>{name}</h3>
-        <img src={imageSource} alt={name} />
+        <p>{artist}</p>
+        <p>{name}</p>
       </Link>
     </div>
   );

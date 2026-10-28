@@ -1,19 +1,21 @@
 import { Link, useNavigate, useParams } from "react-router";
-import { ArtPiece, ArtPieceInfo } from "../types";
+import { ArtPiece, ArtPieceListProps, ArtPieceInfo } from "../types";
+import FavoriteButton from "../components/FavoriteButton/FavoriteButton";
 import CommentForm from "../components/CommentForm/CommentForm";
 import Comments from "../components/Comments/Comments";
-
+    
 type ArtPieceDetailsProps = {
   artPieces: ArtPiece[];
   artPieceInfo: ArtPieceInfo[];
   onAddComment: (slug: string, text: string) => void;
 };
-
+        
 export default function ArtPieceDetails({
   artPieces,
   artPieceInfo,
+  handleToggleFavorite,
   onAddComment,
-}: ArtPieceDetailsProps) {
+}: ArtPieceListProps) {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const artPiece = artPieces.find((piece) => piece.slug === slug);
@@ -28,10 +30,23 @@ export default function ArtPieceDetails({
 
   const comments =
     artPieceInfo.find((info) => info.slug === artPiece.slug)?.comments ?? [];
+  const isFavorite =
+    artPieceInfo.find((info) => info.slug === artPiece.slug)?.isFavorite ??
+    false;
 
   return (
     <div className="details">
-      <img src={artPiece.imageSource} alt={artPiece.name} />
+      <button type="button" onClick={() => navigate("/art-pieces")}>
+        Back to Gallery
+      </button>
+      <div className="details-image">
+        <img src={artPiece.imageSource} alt={artPiece.name} />
+        <FavoriteButton
+          slug={artPiece.slug}
+          isFavorite={isFavorite}
+          onToggleFavorite={handleToggleFavorite}
+        />
+      </div>
       <h3>Titel: {artPiece.name}</h3>
       <p>Artist: {artPiece.artist}</p>
       <p>Year: {artPiece.year}</p>

@@ -40,19 +40,22 @@ export default function ArtPieceDetails({
       </button>
       <div className="details">
         <h2>{artPiece.name}</h2>
-        <div className="details-image">
-          <img src={artPiece.imageSource} alt={artPiece.name} />
-          <FavoriteButton
-            slug={artPiece.slug}
-            isFavorite={isFavorite}
-            onToggleFavorite={handleToggleFavorite}
-          />
+        <div className="detailsContainer">
+          <div className="detailsImageContainer">
+            <img src={artPiece.imageSource} alt={artPiece.name} />
+            <FavoriteButton
+              slug={artPiece.slug}
+              isFavorite={isFavorite}
+              onToggleFavorite={handleToggleFavorite}
+            />
+            <ColorPalette colors={artPiece.colors} />
+          </div>
+          <div>
+            <h3>{artPiece.artist}</h3>
+            <p>Year {artPiece.year}</p>
+            <p>{artPiece.genre}</p>
+          </div>
         </div>
-
-        <p>Artist: {artPiece.artist}</p>
-        <p>Year: {artPiece.year}</p>
-        <p>Genre: {artPiece.genre}</p>
-        <ColorPalette colors={artPiece.colors} />
         <Comments comments={comments} />
         <CommentForm
           onAddComment={(text) => onAddComment(artPiece.slug, text)}

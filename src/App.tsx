@@ -1,6 +1,6 @@
 import "./styles.css";
 import useSWR from "swr";
-import { ArtPiece } from "./types";
+import { ArtPiece, ArtPieceInfo } from "./types";
 import { Route, Routes } from "react-router";
 import ArtPieceList from "./components/ListOfArtPieces/ListOfArtPieces";
 import ArtPieceDetails from "./pages/ArtPieceDetails";
@@ -35,22 +35,24 @@ export default function App() {
     error,
     isLoading,
   } = useSWR<ArtPiece[]>(URL, fetcher);
+  const [artPieceInfo, setArtPieceInfo] = useState<ArtPieceInfo[]>([]);
+
+function handleToggleFavorite(slug: string): void {
+  const existing = artPieceInfo.find((info) => info.slug === slug);
+
+  if (existing) {
+    const updated = artPieceInfo.map((info) =>
+      info.slug === slug ? { ...info, isFavorite: !info.isFavorite } : info
+    );
+    setArtPieceInfo(updated);
+  } else {
+    setArtPieceInfo([...artPieceInfo, { slug, isFavorite: true }]);
+  }
+}
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
   if (!artPieces) return null;
-
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
-  function handleToggleFavorite(event: any): void {
-    console.log(event.target.value);
-    const favorite = artPieces?.filter((piece) =>
-      piece.slug === event.target.value
-        ? { ...piece, isFavorite: !piece.IsFavorite }
-        : piece
-    );
-  }
-
-  // console.log(artPieces);
 
   return (
     <main>
@@ -63,6 +65,7 @@ export default function App() {
           element={
             <ArtPieceList
               artPieces={artPieces}
+              artPieceInfo={artPieceInfo}
               handleToggleFavorite={handleToggleFavorite}
             />
           }

@@ -1,22 +1,28 @@
-import { ArtPieceInfo } from "../../types";
 import { Heart } from "lucide-react";
+
+type FavoriteButtonProps = {
+  slug: string;
+  isFavorite: boolean;
+  onToggleFavorite: (slug: string) => void;
+};
 
 export default function FavoriteButton({
   slug,
   isFavorite,
-  onToogleFavorite,
-}: ArtPieceInfo) {
+  onToggleFavorite,
+}: FavoriteButtonProps) {
   return (
     <button
-      onClick={() => onToogleFavorite(slug)}
+      onClick={() => onToggleFavorite(slug)}
       className="favorite-button"
       type="button"
+      aria-pressed={isFavorite}
+      aria-label="Favorit"
     >
       <Heart
-        fill={isFavorite ? "red" : "none"}
-        color={isFavorite ? "red" : "currentColor"}
+        fill={isFavorite ? "currentColor" : "none"}
+        color="currentColor"
         size={40}
-        onClick={() => console.log(slug)}
       />
     </button>
   );

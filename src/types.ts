@@ -18,5 +18,4 @@ export type ArtPiece = {
 export type ArtPieceInfo = {
   slug: string;
   isFavorite: boolean;
-  onToogleFavorite: (slug: string) => void;
 };

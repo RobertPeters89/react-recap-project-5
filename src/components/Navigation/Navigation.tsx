@@ -1,17 +1,18 @@
-import { Spotlight, HeartPlus, Paintbrush } from "lucide-react";
+import { Focus, HeartPlus, Paintbrush } from "lucide-react";
 import { NavLink } from "react-router";
 
 export default function Navigation() {
   return (
     <nav>
       <NavLink to="/" end>
-        Spotlight <Spotlight />
+        <Focus />
+        <span>Spotlight</span>
       </NavLink>
       <NavLink to="/art-pieces">
-        Art Pieces <Paintbrush />
+        <Paintbrush /> <span>Art Pieces</span>
       </NavLink>
       <NavLink to="/favorites">
-        Favorites <HeartPlus />
+        <HeartPlus /> <span>Favorites</span>
       </NavLink>
     </nav>
   );

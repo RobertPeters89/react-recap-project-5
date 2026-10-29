@@ -96,4 +96,10 @@ test("back to gallery button", async () => {
       </Routes>
     </MemoryRouter>
   );
+
+  const buttons = screen.getAllByRole("button", { name: "Back to Gallery" });
+  await user.click(buttons[0]);
+
+  const gallery = screen.getByText("Art Pieces");
+  expect(gallery).toBeInTheDocument();
 });

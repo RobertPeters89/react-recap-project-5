@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { Link } from "react-router";
 
 type ArtPiecePreviewProps = {
@@ -17,8 +16,10 @@ export default function ArtPiecePreview({
   return (
     <Link to={`/art-pieces/${slug}`}>
       <img src={imageSource} alt={name} />
-      <h3>{name}</h3>
-      <p>{artist}</p>
+      <div className="previewInfo">
+        <h3>{name}</h3>
+        <p>{artist}</p>
+      </div>
     </Link>
   );
 }

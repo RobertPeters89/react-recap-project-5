@@ -103,3 +103,32 @@ test("back to gallery button", async () => {
   const gallery = screen.getByText("Art Pieces");
   expect(gallery).toBeInTheDocument();
 });
+
+test("no art piece found message will be shown and back link", () => {
+  const handleToggleFavorite = vi.fn();
+  const onAddComment = vi.fn();
+
+  render(
+    <MemoryRouter initialEntries={["/art-pieces/unkown-slug"]}>
+      <Routes>
+        <Route
+          path="/art-pieces/:slug"
+          element={
+            <ArtPieceDetails
+              artPieces={artPieces}
+              artPieceInfo={artPieceInfo}
+              handleToggleFavorite={handleToggleFavorite}
+              onAddComment={onAddComment}
+            />
+          }
+        />
+      </Routes>
+    </MemoryRouter>
+  );
+
+  const message = screen.getByText("Art piece not found");
+  expect(message).toBeInTheDocument();
+
+  const link = screen.getByRole("link", { name: "Back" });
+  expect(link).toHaveAttribute("href", "/art-pieces");
+});

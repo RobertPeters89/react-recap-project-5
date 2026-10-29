@@ -28,6 +28,9 @@ test("the navigation is marked", () => {
     </MemoryRouter>
   );
 
+  const spotlightLink = screen.getByRole("link", { name: "Spotlight" });
+  expect(spotlightLink).toHaveClass("active");
+
   const artPiecesLink = screen.getByRole("link", { name: "Art Pieces" });
   expect(artPiecesLink).not.toHaveClass("active");
 

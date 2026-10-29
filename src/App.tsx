@@ -8,6 +8,7 @@ import Spotlight from "./pages/Spotlight";
 import Navigation from "./components/Navigation/Navigation";
 import { useState } from "react";
 import Favorite from "./pages/Favorite";
+import useLocalStorageState from "use-local-storage-state";
 
 const URL = `https://example-apis.vercel.app/api/art`;
 
@@ -36,7 +37,12 @@ export default function App() {
     isLoading,
   } = useSWR<ArtPiece[]>(URL, fetcher);
 
-  const [artPieceInfo, setArtPieceInfo] = useState<ArtPieceInfo[]>([]);
+  const [artPieceInfo, setArtPieceInfo] = useLocalStorageState<ArtPieceInfo[]>(
+    "artPieceInfo",
+    {
+      defaultValue: [],
+    }
+  );
 
   function handleToggleFavorite(slug: string): void {
     const existing = artPieceInfo.find((info) => info.slug === slug);

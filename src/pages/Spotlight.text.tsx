@@ -1,8 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import userEvent, { UserEvent } from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import Spotlight from "./Spotlight";
 import { MemoryRouter } from "react-router";
-import FavoriteButton from "../components/FavoriteButton/FavoriteButton";
 import { ArtPiece } from "../types";
 
 test("renders image, artist and FavoriteButton", async () => {
@@ -39,4 +38,18 @@ test("renders image, artist and FavoriteButton", async () => {
       ></Spotlight>
     </MemoryRouter>
   );
+
+  const imageSource = screen.getByRole("img", { name: "Test Painting" });
+  expect(imageSource).toHaveAttribute(
+    "src",
+    "https://example.com/test-image.jpg"
+  );
+
+  const artist = screen.getByText("Test Artist");
+  expect(artist).toBeInTheDocument();
+
+  const favoriteButton = screen.getByRole("button");
+  await user.click(favoriteButton);
+
+  expect(handleToggleFavorite).toHaveBeenCalledTimes(1);
 });

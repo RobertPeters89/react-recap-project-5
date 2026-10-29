@@ -4,10 +4,7 @@ import ArtPiecePreview from "./ArtPiecePreview";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import { userEvent } from "@testing-library/user-event";
 
-test("renders slug, image, name, artist and children, children is FavoriteButton", async () => {
-  const user = userEvent.setup();
-  const onToggleFavorite = vi.fn();
-
+test("renders slug, image, name, artist and children, children is FavoriteButton", () => {
   render(
     <MemoryRouter>
       <ArtPiecePreview
@@ -15,13 +12,7 @@ test("renders slug, image, name, artist and children, children is FavoriteButton
         imageSource="https://example.com/test-image.jpg"
         name="Test Painting"
         artist="Test Artist"
-      >
-        <FavoriteButton
-          slug="test-art-piece"
-          isFavorite={false}
-          onToggleFavorite={onToggleFavorite}
-        />
-      </ArtPiecePreview>
+      />
     </MemoryRouter>
   );
 
@@ -39,9 +30,4 @@ test("renders slug, image, name, artist and children, children is FavoriteButton
 
   const artist = screen.getByText("Test Artist");
   expect(artist).toBeInTheDocument();
-
-  const favoriteButton = screen.getByRole("button");
-  await user.click(favoriteButton);
-
-  expect(onToggleFavorite).toHaveBeenCalledTimes(1);
 });

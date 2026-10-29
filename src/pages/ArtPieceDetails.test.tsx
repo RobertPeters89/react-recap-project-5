@@ -55,16 +55,16 @@ test("renders details of the art piece and handleToggleFavorite", async () => {
     "https://example.com/test-image.jpg"
   );
 
-  const name = screen.getByText("Titel: Test Painting");
+  const name = screen.getByRole("heading", { name: "Test Painting" });
   expect(name).toBeInTheDocument();
 
-  const artist = screen.getByText("Artist: Test Artist");
+  const artist = screen.getByText("Test Artist");
   expect(artist).toBeInTheDocument();
 
-  const year = screen.getByText("Year: 2000");
+  const year = screen.getByText("Year 2000");
   expect(year).toBeInTheDocument();
 
-  const genre = screen.getByText("Genre: Test Genre");
+  const genre = screen.getByText("Test Genre");
   expect(genre).toBeInTheDocument();
 
   const favoriteButton = screen.getByRole("button", { name: "Favorit" });
@@ -97,8 +97,8 @@ test("back to gallery button", async () => {
     </MemoryRouter>
   );
 
-  const buttons = screen.getAllByRole("button", { name: "Back to Gallery" });
-  await user.click(buttons[0]);
+  const button = screen.getByRole("button", { name: "Back to Gallery" });
+  await user.click(button);
 
   const gallery = screen.getByText("Art Pieces");
   expect(gallery).toBeInTheDocument();

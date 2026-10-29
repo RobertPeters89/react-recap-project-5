@@ -19,16 +19,19 @@ export default function CommentForm({ onAddComment }: CommentFormProps) {
 
   return (
     <form className="comment-form" onSubmit={handleSubmit}>
-      <label htmlFor="comment">Add a comment.</label>
-      <input
-        id="comment"
-        name="comment"
-        type="text"
-        value={text}
-        onChange={(event) => setText(event.target.value)}
-        required
-      />
-      <button type="submit">Send</button>
+      <label htmlFor="comment" />
+      <div className="input-wrapper">
+        <input
+          id="comment"
+          name="comment"
+          type="text"
+          value={text}
+          onChange={(event) => setText(event.target.value)}
+          placeholder="Add a comment..."
+          required
+        />
+      </div>
+      <button type="submit">post comment</button>
     </form>
   );
 }

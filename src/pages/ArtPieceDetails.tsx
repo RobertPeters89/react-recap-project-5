@@ -2,9 +2,8 @@ import { Link, useNavigate, useParams } from "react-router";
 import { ArtPieceDetailsProps } from "../types";
 import FavoriteButton from "../components/FavoriteButton/FavoriteButton";
 import ColorPalette from "../components/ColorPalette/ColorPalette";
-
-import CommentForm from "../components/CommentForm/CommentForm";
 import Comments from "../components/Comments/Comments";
+import { ArrowLeft } from "lucide-react";
 
 export default function ArtPieceDetails({
   artPieces,
@@ -31,28 +30,38 @@ export default function ArtPieceDetails({
     false;
 
   return (
-    <div className="details">
-      <button type="button" onClick={() => navigate("/art-pieces")}>
-        Back to Gallery
+    <>
+      <button
+        className="navBack"
+        type="button"
+        onClick={() => navigate("/art-pieces")}
+      >
+        <ArrowLeft /> Back to Gallery
       </button>
-      <div className="details-image">
-        <img src={artPiece.imageSource} alt={artPiece.name} />
-        <FavoriteButton
-          slug={artPiece.slug}
-          isFavorite={isFavorite}
-          onToggleFavorite={handleToggleFavorite}
-        />
+      <div className="details">
+        <div className="detailsContainer">
+          <div className="detailsImageContainer">
+            <img src={artPiece.imageSource} alt={artPiece.name} />
+            <FavoriteButton
+              slug={artPiece.slug}
+              isFavorite={isFavorite}
+              onToggleFavorite={handleToggleFavorite}
+            />
+            <ColorPalette colors={artPiece.colors} />
+          </div>
+          <div>
+            <p className="artist">{artPiece.artist}</p>
+            <h2>{artPiece.name}</h2>
+            <p>Year {artPiece.year}</p>
+            <p>{artPiece.genre}</p>
+          </div>
+        </div>
       </div>
-      <h3>Titel: {artPiece.name}</h3>
-      <p>Artist: {artPiece.artist}</p>
-      <p>Year: {artPiece.year}</p>
-      <p>Genre: {artPiece.genre}</p>
-      <ColorPalette colors={artPiece.colors} />
-      <Comments comments={comments} />
-      <CommentForm onAddComment={(text) => onAddComment(artPiece.slug, text)} />
-      <button type="button" onClick={() => navigate("/art-pieces")}>
-        Back to Gallery
-      </button>
-    </div>
+      <Comments
+        slug={artPiece.slug}
+        onAddComment={onAddComment}
+        comments={comments}
+      />
+    </>
   );
 }

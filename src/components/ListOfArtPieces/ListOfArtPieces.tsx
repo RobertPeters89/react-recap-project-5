@@ -21,13 +21,12 @@ export default function ArtPieceList({
               imageSource={artPiece.imageSource}
               name={artPiece.name}
               artist={artPiece.artist}
-            >
-              <FavoriteButton
-                slug={artPiece.slug}
-                isFavorite={isFavorite}
-                onToggleFavorite={handleToggleFavorite}
-              />
-            </ArtPiecePreview>
+            />
+            <FavoriteButton
+              slug={artPiece.slug}
+              isFavorite={isFavorite}
+              onToggleFavorite={handleToggleFavorite}
+            />
           </li>
         );
       })}

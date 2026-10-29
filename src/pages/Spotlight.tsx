@@ -22,14 +22,24 @@ export default function Spotlight({
       ?.isFavorite ?? false;
 
   return (
-    <div className="spotlight">
-      <img src={spotLightPeice.imageSource} alt={spotLightPeice.name} />
-      <p>{spotLightPeice.artist}</p>
-      <FavoriteButton
-        slug={spotLightPeice.slug}
-        isFavorite={isFavorite}
-        onToggleFavorite={handleToggleFavorite}
-      />
-    </div>
+    <>
+      <div className="spotlightContainer">
+        <div className="spotlight">
+          <img src={spotLightPeice.imageSource} alt={spotLightPeice.name} />
+          <FavoriteButton
+            slug={spotLightPeice.slug}
+            isFavorite={isFavorite}
+            onToggleFavorite={handleToggleFavorite}
+          />
+        </div>
+        <div>
+          <h2>
+            <span className="artist">{spotLightPeice.artist}</span>
+            <br />
+            {spotLightPeice.name}{" "}
+          </h2>
+        </div>
+      </div>
+    </>
   );
 }

@@ -1,13 +1,21 @@
 import { ArtPieceComment } from "../../types";
+import CommentForm from "../CommentForm/CommentForm";
 
 type CommentsProps = {
   comments: ArtPieceComment[];
+  slug: string;
+  onAddComment: (slug: string, text: string) => void;
 };
 
-export default function Comments({ comments }: CommentsProps) {
+export default function Comments({
+  comments,
+  slug,
+  onAddComment,
+}: CommentsProps) {
   return (
-    <section>
-      <h2>Comments</h2>
+    <section className="commentSection">
+      <h2>{comments.length} Comments </h2>
+      <CommentForm onAddComment={(text) => onAddComment(slug, text)} />
       {comments.length === 0 ? (
         <p>No comments yet.</p>
       ) : (

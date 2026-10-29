@@ -3,6 +3,7 @@ import { ArtPieceDetailsProps } from "../types";
 import FavoriteButton from "../components/FavoriteButton/FavoriteButton";
 import ColorPalette from "../components/ColorPalette/ColorPalette";
 import Comments from "../components/Comments/Comments";
+import { ArrowLeft } from "lucide-react";
 
 export default function ArtPieceDetails({
   artPieces,
@@ -35,7 +36,7 @@ export default function ArtPieceDetails({
         type="button"
         onClick={() => navigate("/art-pieces")}
       >
-        Back to Gallery →
+        <ArrowLeft /> Back to Gallery
       </button>
       <div className="details">
         <div className="detailsContainer">

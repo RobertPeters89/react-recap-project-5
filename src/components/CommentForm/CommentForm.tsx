@@ -19,7 +19,7 @@ export default function CommentForm({ onAddComment }: CommentFormProps) {
 
   return (
     <form className="comment-form" onSubmit={handleSubmit}>
-      <label htmlFor="comment">Add a comment..</label>
+      <label htmlFor="comment" />
       <div className="input-wrapper">
         <input
           id="comment"
@@ -27,6 +27,7 @@ export default function CommentForm({ onAddComment }: CommentFormProps) {
           type="text"
           value={text}
           onChange={(event) => setText(event.target.value)}
+          placeholder="Add a comment..."
           required
         />
       </div>

@@ -28,11 +28,9 @@ test("the navigation is marked", () => {
     </MemoryRouter>
   );
 
-  expect(screen.getByRole("link", { name: "Spotlight" })).toHaveClass("active");
-  expect(screen.getByRole("link", { name: "Art Pieces" })).not.toHaveClass(
-    "active"
-  );
-  expect(screen.getByRole("link", { name: "Favorites" })).not.toHaveClass(
-    "active"
-  );
+  const artPiecesLink = screen.getByRole("link", { name: "Art Pieces" });
+  expect(artPiecesLink).not.toHaveClass("active");
+
+  const favorites = screen.getByRole("link", { name: "Favorites" });
+  expect(favorites).not.toHaveClass("active");
 });

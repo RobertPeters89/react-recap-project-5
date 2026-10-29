@@ -14,7 +14,7 @@ export default function Comments({
 }: CommentsProps) {
   return (
     <section className="commentSection">
-      <h2>Comments</h2>
+      <h2>{comments.length} Comments </h2>
       <CommentForm onAddComment={(text) => onAddComment(slug, text)} />
       {comments.length === 0 ? (
         <p>No comments yet.</p>

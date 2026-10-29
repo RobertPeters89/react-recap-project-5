@@ -1,7 +1,8 @@
 :root {
   --main-black: rgb(22, 22, 29);
   --main-white: rgb(233, 224, 224);
-  --accent-orange: #e7c06e;
+  --accent-orange: rgb(233, 224, 224);
+  /* --accent-orange: #e7c06e; */
 }
 
 *,
@@ -41,7 +42,7 @@ nav {
   position: fixed;
   z-index: 1;
   bottom: 50%;
-  left: 1rem;
+  right: 2rem;
   display: flex;
   gap: 0.25rem;
   flex-direction: column;
@@ -50,45 +51,41 @@ nav {
 }
 
 nav a {
-  color: rgb(90, 89, 89);
   width: 15rem;
   text-decoration: none;
-  padding: 2rem;
+  padding: 1rem;
   background: var(--main-black);
   position: relative;
+  border: 2px solid var(--accent-orange);
+  background-color: transparent;
+  color: var(--accent-orange);
   &:hover {
     background-color: var(--accent-orange);
     color: var(--main-black);
   }
-  &:hover span {
-    opacity: 1;
-    left: 50%;
-    top: 50%;
+  &:hover svg {
+    color: var(--main-black);
   }
+}
+
+nav svg {
+  transition: all 0.25s ease-in-out;
 }
 
 nav span {
   font-weight: 900;
   font-size: 18px;
   position: absolute;
-  left: 80%;
+  left: 50%;
   top: 50%;
-  opacity: 0;
   transform: translate(-50%, -50%);
   transition: all 0.25s ease-in-out;
   width: max-content;
 }
 
 nav a.active {
-  color: var(--main-white);
-  &:hover {
-    color: var(--main-black);
-  }
-}
-nav a.active span {
-  opacity: 1;
-  left: 50%;
-  top: 50%;
+  color: var(--main-black);
+  background-color: var(--accent-orange);
 }
 
 .art-list {
@@ -183,19 +180,23 @@ nav a.active span {
   }
 }
 .navBack {
+  font-weight: 900;
+  font-size: 18px;
+  width: 15rem;
   position: absolute;
   top: 2rem;
   right: 2rem;
   position: fixed;
   border: 2px solid transparent;
-  background-color: var(--main-white);
+  background-color: var(--accent-orange);
+  color: var(--main-black);
   padding: 0.5rem 1rem;
   cursor: pointer;
   transition: 0.25s;
   &:hover {
-    border: 2px solid var(--main-white);
-    background-color: var(--main-black);
-    color: var(--main-white);
+    border: 2px solid var(--accent-orange);
+    background-color: transparent;
+    color: var(--accent-orange);
   }
 }
 
@@ -248,7 +249,45 @@ nav a.active span {
 
 .commentSection {
   padding: 1rem 2rem 2rem;
-  background-color: rgb(117, 116, 116);
+  color: var(--accent-orange);
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+input[type="text"] {
+  field-sizing: content;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 2px rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  height: 2lh;
+  color: #f5f5f7;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-wrapper::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-orange);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.input-wrapper:focus-within::after {
+  transform: scaleX(1);
 }
 
 .comments {
@@ -258,17 +297,38 @@ nav a.active span {
 
 .comments li {
   padding: 0.5rem 0;
-  border-bottom: 1px solid #0002;
+  border-bottom: 1px solid var(--accent-orange);
+}
+.comments li p {
+  font-size: 18px;
+  font-weight: 900;
 }
 
 .comments time {
   display: block;
   font-size: 0.8rem;
-  color: #666;
+  color: var(--accent-orange);
+  font-style: italic;
 }
 
 .comment-form {
   display: grid;
-  gap: 0.5rem;
-  max-width: 24rem;
+  gap: 1.5rem;
+  max-width: 50%;
+}
+.comment-form button {
+  font-weight: 900;
+  font-size: 18px;
+  padding: 0.5rem 3rem;
+  background: transparent;
+  color: var(--accent-orange);
+  border: var(--accent-orange) 2px solid;
+  width: fit-content;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: all 0.125s ease;
+  &:hover {
+    background: var(--accent-orange);
+    color: var(--main-black);
+  }
 }

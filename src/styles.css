@@ -49,13 +49,16 @@ h2 {
 nav {
   position: fixed;
   z-index: 1;
-  bottom: 1rem;
-  left: 50%;
+  bottom: 0;
+  right: 0;
   display: flex;
   gap: 0.25rem;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  transform: translate(-50%, 0%);
+  height: 100%;
+  background-color: var(--main-black);
+  padding: 2rem;
+  border-left: 2px var(--main-white) solid;
 }
 
 nav a {
@@ -81,13 +84,16 @@ nav a {
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1700px) {
   nav {
     bottom: 1rem;
     right: 50%;
     gap: 1rem;
     flex-direction: row;
     transform: translate(50%, 0);
+    height: fit-content;
+    background-color: transparent;
+    border: none;
   }
 
   nav a {
@@ -197,6 +203,12 @@ nav a.active {
   object-fit: cover;
 }
 
+@media screen and (max-width: 768px) {
+  .spotlight img {
+    border: 0.5rem var(--main-white) solid;
+  }
+}
+
 .favorite-button {
   position: absolute;
   top: 1rem;
@@ -262,7 +274,7 @@ nav a.active {
   .detailsContainer {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 2rem;
   }
 }
@@ -284,6 +296,11 @@ nav a.active {
   border: 2.5rem var(--main-white) solid;
 }
 
+@media screen and (max-width: 768px) {
+  .details img {
+    border: 0.5rem var(--main-white) solid;
+  }
+}
 .subDetails {
   display: flex;
   gap: 1rem;

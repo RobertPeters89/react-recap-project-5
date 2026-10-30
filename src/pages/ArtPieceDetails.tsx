@@ -52,8 +52,10 @@ export default function ArtPieceDetails({
           <div>
             <p className="artist">{artPiece.artist}</p>
             <h2>{artPiece.name}</h2>
-            <p>Year {artPiece.year}</p>
-            <p>{artPiece.genre}</p>
+            <div className="subDetails">
+              <p>{artPiece.year}</p>
+              <p>{artPiece.genre}</p>
+            </div>
           </div>
         </div>
       </div>

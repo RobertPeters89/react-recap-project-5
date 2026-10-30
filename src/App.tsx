@@ -97,8 +97,6 @@ export default function App() {
   if (error) return <p>Error: {error.message}</p>;
   if (!artPieces) return null;
 
-  console.log(artPieceInfo);
-
   return (
     <main>
       <h1>Art Gallery</h1>
